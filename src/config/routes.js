@@ -2,7 +2,7 @@ import React from 'react'
 
 const routes = {
     home:"/",
-    shop:"/following",
+    shop:"/shop",
     profile:"/@:nickname",
     blog:"/blog",
     search:"/search",
