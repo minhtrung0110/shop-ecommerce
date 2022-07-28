@@ -1,7 +1,6 @@
 import './GlobalStyles.scss'
 
-function GlobalStyles({childen}){
-
-        return childen
+function GlobalStyles({children}){
+        return children
 }
 export default GlobalStyles;
