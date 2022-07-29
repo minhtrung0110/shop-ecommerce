@@ -7,6 +7,8 @@ const routes = {
     blog:"/blog",
     search:"/search",
     contact:"/contact",
+    login:"/login",
+    register:"/register",
    
 }
 
