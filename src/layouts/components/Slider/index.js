@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import config from "~/config";
 import BtnSlider from "./BtnSlider"
-import dataSlider from "./dataSlider"
+import * as sliderService from '~/services/sliderService'
 
 
 
@@ -16,15 +16,8 @@ function Slider({arr_images}) {
 	const [slideIndex, setSlideIndex] = useState(1)
 	const timeoutRef = useRef(null);
 
-	useEffect(()=>{
-		fetch(`https://basic-json-server.herokuapp.com/api/sliders`)
-		  .then((res) => res.json())
-		  .then((data) => {
-			setDataSliders(data)
-			
-		  });
-	},[])
-	//console.log(arr_images)
+		
+	console.log(dataSlider)
 	function resetTimeout() {
 	  if (timeoutRef.current) {
 		clearTimeout(timeoutRef.current);
@@ -52,6 +45,13 @@ function Slider({arr_images}) {
         setSlideIndex(index)
     }
 	useEffect(() => {
+
+		const fetchApi = async () => {
+
+			const result = await sliderService.getSliders();
+			setDataSliders(result);
+		};
+		fetchApi();
 		resetTimeout();
 		timeoutRef.current = setTimeout(
 		  () =>
@@ -63,15 +63,15 @@ function Slider({arr_images}) {
 				setSlideIndex(1)
 			}
 		 },
-		  5500
+		  1500
 		);
 	
 		return () => {
 		  resetTimeout();
 		};
-	  }, [5500]);
+	  }, []);
     return ( 
-	<div className={cx("container-slider main_slider")}>
+	<div className={cx("main_slider")}>
 		{dataSlider.map((obj, index) => {
 			return (
 				<div
@@ -85,7 +85,7 @@ function Slider({arr_images}) {
 					<div class={cx("main_slider_content")}>
 						<h6>{obj.name}</h6>
 						<h1>{obj.description}</h1>
-						<div class={cx("red_button","shop_now_button")}><a href="#">shop now</a></div>
+						<div class={cx("red_button","shop_now_button")}><Link to={config.routes.shop}>shop now</Link></div>
 					</div>
 				</div>
 			</div>
