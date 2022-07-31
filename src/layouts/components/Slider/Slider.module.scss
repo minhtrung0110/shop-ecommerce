@@ -1,4 +1,72 @@
 
+/*********************************
+3.7 Main Slider
+*********************************/
+
+.main_slider
+{
+	width: 100%;
+	height: 700px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	margin-top: 150px;
+}
+.main_slider_content
+{
+	width: 60%;
+}
+.main_slider_content h6
+{
+	font-weight: 500;
+	text-transform: uppercase;
+	margin-bottom: 29px;
+}
+.main_slider_content h1
+{
+	font-weight: 400;
+	line-height: 1;
+}
+.red_button
+{
+	display: -webkit-inline-box;
+	display: -moz-inline-box;
+	display: -ms-inline-flexbox;
+	display: -webkit-inline-flex;
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: auto;
+	height: 40px;
+	background: #fe4c50;
+	border-radius: 3px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.red_button:hover
+{
+	background: #FE7C7F !important;
+}
+.red_button a
+{
+	display: block;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+	line-height: 40px;
+	width: 100%;
+}
+.shop_now_button
+{
+	width: 140px;
+	margin-top: 32px;
+}
 
 .container-slider {
 	max-width: 700px;
@@ -20,6 +88,11 @@
 	position: absolute;
 	opacity: 0;
 	transition: opacity ease-in-out 0.4s;
+	.img {
+		width: 25px;
+		height: 25px;
+		pointer-events: none;
+	  }
   }
   .slide .img {
 	width: 100%;
@@ -42,13 +115,13 @@
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
+
+	.icon{
+			font-size: 20px;
+	}
+	
   }
   
-  .btn-slide .img {
-	width: 25px;
-	height: 25px;
-	pointer-events: none;
-  }
   .prev {
 	top: 50%;
 	left: 20px;

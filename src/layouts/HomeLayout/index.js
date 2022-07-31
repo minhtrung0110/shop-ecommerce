@@ -6,23 +6,20 @@ import classNames from "classnames/bind";
 import styles from "./HomeLayout.module.scss";
 
 const cx = classNames.bind(styles);
-
 const getSliders = () => {
-  const geoAPIURL = `https://basic-json-server.herokuapp.com/api/sliders`;
-  fetch(geoAPIURL)
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    });
+  fetch(`https://basic-json-server.herokuapp.com/api/sliders`)
+  .then((res) => res.json())
+  .then((data) => {
+    return data
+  });
 };
-const sliders = getSliders();
-console.log(getSliders());
+
 
 function HomeLayout({ children }) {
   return (
     <div className={cx("super_container")}>
       <Header />
-      <Slider arr_images={sliders} />
+      <Slider arr_images={getSliders()} />
       <Banner />
       <div className={cx("content")}>{children}</div>
       <Footer />
