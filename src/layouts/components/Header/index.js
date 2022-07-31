@@ -2,6 +2,7 @@ import style from './Header.module.scss'
 import classNames from 'classnames/bind';
 import TopNavigation from './TopNavigation'
 import MainNavigation from './MainNavigation'
+import RessponsiveNavigation from './RessponsiveNavigation'
 import config from '~/config'
 
 
@@ -33,7 +34,7 @@ const findMyState=() =>{
         fetch(geoAPIURL)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+           // console.log(data)
             return data.countryCode
         })
     }
@@ -51,6 +52,7 @@ function Header() {
         <TopNavigation currency_items={CURRENCY_ITEMS} language_items={LANGUAGE_ITEMS} countryCode={findMyState()}/>
 
         <MainNavigation nav_items={MainNavigation_ITEMS} />
+        <RessponsiveNavigation />
     </div>  );
 }
 

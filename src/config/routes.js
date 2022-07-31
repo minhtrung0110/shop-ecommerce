@@ -9,6 +9,7 @@ const routes = {
     contact:"/contact",
     login:"/login",
     register:"/register",
+    cart:"/cart",
    
 }
 

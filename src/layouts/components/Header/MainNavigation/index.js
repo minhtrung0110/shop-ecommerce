@@ -1,6 +1,10 @@
 import style from './MainNavigation.module.scss'
 import classNames from 'classnames/bind';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import {  faCartPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
+import config from '~/config';
 
 const cx=classNames.bind(style);
 function MainNavigation({nav_items=[],}) {
@@ -22,13 +26,13 @@ function MainNavigation({nav_items=[],}) {
                        
                     </ul>
                     <ul class="navbar_user">
-                        <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                        <li><Link to={config.routes.search}>  <FontAwesomeIcon icon={faMagnifyingGlass} className={cx('icon-mainnav')}/></Link></li>
+                        <li><Link to={config.routes.profile}><FontAwesomeIcon icon={faUserCircle} className={cx('icon-mainnav')}/></Link></li>
                         <li class="checkout">
-                            <a href="#">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                           <Link to={config.routes.cart}>
+                            <FontAwesomeIcon icon={faCartPlus} />
                                 <span id="checkout_items" class="checkout_items">2</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <div class="hamburger_container">

@@ -1,9 +1,10 @@
 import { useState } from "react";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from "./TopNavigation.module.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import config from "~/config";
+import { faAngleDown, faRegistered, faSignIn, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 const cx = classNames.bind(style);
 
@@ -34,7 +35,7 @@ function TopNavigation({
                 <li class="currency">
                   <a href="#">
                     {currency}
-                    <i class="fa fa-angle-down"></i>
+                    <FontAwesomeIcon icon={faAngleDown} className={cx('icon-topnav')}/>
                   </a>
                   <ul class="currency_selection">
                     {currency_items.map((item, index) => (
@@ -52,7 +53,7 @@ function TopNavigation({
                 <li class="language">
                   <a href="#">
                     {language}
-                    <i class="fa fa-angle-down"></i>
+                    <FontAwesomeIcon icon={faAngleDown} className={cx('icon-topnav')}/>
                   </a>
                   <ul class="language_selection">
                     {language_items.map((item, index) => (
@@ -70,17 +71,17 @@ function TopNavigation({
                 <li class="account">
                   <a href="#">
                     My Account
-                    <i class="fa fa-angle-down"></i>
+                    <FontAwesomeIcon icon={faAngleDown} className={cx('icon-topnav')}/>
                   </a>
                   <ul class="account_selection">
                     <li>
                       <Link to={config.routes.login}>
-                        <i class="fa fa-sign-in" aria-hidden="true"></i>Sign In
+                      <FontAwesomeIcon icon={faSignIn} className={cx('icon-myaccount-topnav')}/>Sign In
                       </Link>
                     </li>
                     <li>
                       <Link to={config.routes.register}>
-                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                      <FontAwesomeIcon icon={faUserPlus} className={cx('icon-myaccount-topnav')}/>
                         Register
                       </Link>
                     </li>
