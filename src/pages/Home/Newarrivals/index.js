@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./Arrivals.module.scss";
-import {useState,useEffect} from "react"
+import {useState,useEffect,useRef} from "react"
 import * as categoryService from '~/services/categoryService'
 import * as productService from '~/services/productService'
 import ProductItem from '~/components/ProductItem'
@@ -10,6 +10,8 @@ const cx = classNames.bind(styles);
 function NewArrivals() {
 	const [new_arrivals_category,setNew_Arrivals_Category] = useState([])
 	const [new_arrivals,setNew_Arrivals] = useState([])
+	const [filter,setFilter]= useState('all')
+
 	useEffect(() => {
         const fetchApi = async () => {
 
@@ -20,28 +22,35 @@ function NewArrivals() {
         };
         fetchApi();
     },[])
-	console.log(new_arrivals_category)
+	
     return (
-        <div class="new_arrivals">
-		<div class="container">
-			<div class="row">
-				<div class="col text-center">
-					<div class="section_title new_arrivals_title">
+        <div className="new_arrivals">
+		<div className="container">
+			<div className="row">
+				<div className="col text-center">
+					<div className="section_title new_arrivals_title">
 						<h2>New Arrivals</h2>
 					</div>
 				</div>
 			</div>
-			<div class="row align-items-center">
-				<div class="col text-center">
-					<div class="new_arrivals_sorting">
-						<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-						<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" 
-									data-filter="*">all</li>
+			<div className="row align-items-center">
+				<div className="col text-center">
+					<div className="new_arrivals_sorting">
+						<ul className="arrivals_grid_sorting clearfix button-group filters-button-group">
+						<li className={cx("grid_sorting_button","button","d-flex","flex-column","justify-content-center","align-items-center",
+									`${filter==='all'?'active':''}`)}
+									data-filter="*"
+									onClick={()=>setFilter('all')}
+									>all</li>
 							{
 								new_arrivals_category.map((item, index)=>(
-									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center  is-checked" 
+									<li className={cx("grid_sorting_button","button","d-flex","flex-column","justify-content-center","align-items-center",
+									`${filter==item.id?'active':''}`)} 
 									data-filter="*"
-									key={index}>
+									key={index}
+									
+									onClick={()=>{ setFilter(item.id)}}
+									>
 										{item.name}
 										</li>
 								))
@@ -50,14 +59,20 @@ function NewArrivals() {
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col">
-					<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+			<div className="row">
+				<div className="col">
+					<div className="product-grid row" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
 						
 							{
-								new_arrivals.map((item, index)=>(
-									<ProductItem product={item} key={index}/>
-								))
+								new_arrivals.map((item, index)=>{
+									//const category=new_arrivals_category.find((obj)=> obj.id===item.categoryId )
+									
+									return  <ProductItem product={item} 
+									grid={3} key={index}
+									data_filter={filter==='all'?true:item.categoryId===filter?true:false}
+									//typeProduct={category.name}
+									/>
+								})
 							}
 					
 					</div>
