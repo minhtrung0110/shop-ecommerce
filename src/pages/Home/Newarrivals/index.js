@@ -11,10 +11,20 @@ function NewArrivals() {
 	const [new_arrivals_category,setNew_Arrivals_Category] = useState([])
 	const [new_arrivals,setNew_Arrivals] = useState([])
 	const [filter,setFilter]= useState('all')
-
+	const [carts,setCarts]=useState([])
+   
+	console.log(JSON.parse(localStorage.getItem('cart')).length)
+	const handleAddCart=(item) => {
+		const itemCart={productId:item.id,amount:1}
+		setCarts(prev=> {
+			const arrayCart=[...prev,itemCart]
+			// luu vao gio hang
+			localStorage.setItem('cart',JSON.stringify(arrayCart));
+			return arrayCart })
+		
+	}
 	useEffect(() => {
         const fetchApi = async () => {
-
             const result = await categoryService.getCategories();
 			setNew_Arrivals_Category(result);
 			const NewArrivals= await productService.getNewArrivals();
@@ -70,7 +80,7 @@ function NewArrivals() {
 									return  <ProductItem product={item} 
 									grid={3} key={index}
 									data_filter={filter==='all'?true:item.categoryId===filter?true:false}
-									//typeProduct={category.name}
+									onClick={()=>{handleAddCart(item)}}
 									/>
 								})
 							}

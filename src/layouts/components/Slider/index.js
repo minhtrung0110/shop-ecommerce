@@ -17,7 +17,7 @@ function Slider({arr_images}) {
 	const timeoutRef = useRef(null);
 
 		
-	console.log(dataSlider)
+	//console.log(dataSlider)
 	function resetTimeout() {
 	  if (timeoutRef.current) {
 		clearTimeout(timeoutRef.current);

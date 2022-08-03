@@ -10,6 +10,7 @@ const routes = {
     login:"/login",
     register:"/register",
     cart:"/cart",
+    detailProduct:"/detailproduct/:id",
    
 }
 

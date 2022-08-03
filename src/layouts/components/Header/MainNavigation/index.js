@@ -1,5 +1,6 @@
 import style from './MainNavigation.module.scss'
 import classNames from 'classnames/bind';
+import {useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import {  faCartPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +8,10 @@ import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import config from '~/config';
 
 const cx=classNames.bind(style);
-function MainNavigation({nav_items=[],}) {
+function MainNavigation({nav_items=[],numCart=0}) {
+    const [amountCart,setAmountCart]=useState(0)
+    
+
     return ( <div class={cx("main_nav_container")}>
     <div class="container">
         <div class="row">
@@ -31,7 +35,7 @@ function MainNavigation({nav_items=[],}) {
                         <li class="checkout">
                            <Link to={config.routes.cart}>
                             <FontAwesomeIcon icon={faCartPlus} />
-                                <span id="checkout_items" class="checkout_items">2</span>
+                                <span id="checkout_items" class="checkout_items">{amountCart}</span>
                             </Link>
                         </li>
                     </ul>
