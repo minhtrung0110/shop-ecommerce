@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./Arrivals.module.scss";
-import {useState,useEffect,useRef} from "react"
+import {useState,useEffect,useContext} from "react"
+import {CartContext} from '~/providers/CartContext'
 import * as categoryService from '~/services/categoryService'
 import * as productService from '~/services/productService'
 import ProductItem from '~/components/ProductItem'
@@ -11,18 +12,9 @@ function NewArrivals() {
 	const [new_arrivals_category,setNew_Arrivals_Category] = useState([])
 	const [new_arrivals,setNew_Arrivals] = useState([])
 	const [filter,setFilter]= useState('all')
-	const [carts,setCarts]=useState([])
-   
-	console.log(JSON.parse(localStorage.getItem('cart')).length)
-	const handleAddCart=(item) => {
-		const itemCart={productId:item.id,amount:1}
-		setCarts(prev=> {
-			const arrayCart=[...prev,itemCart]
-			// luu vao gio hang
-			localStorage.setItem('cart',JSON.stringify(arrayCart));
-			return arrayCart })
-		
-	}
+	const cartContext = useContext(CartContext)
+	 
+	
 	useEffect(() => {
         const fetchApi = async () => {
             const result = await categoryService.getCategories();
@@ -55,7 +47,7 @@ function NewArrivals() {
 							{
 								new_arrivals_category.map((item, index)=>(
 									<li className={cx("grid_sorting_button","button","d-flex","flex-column","justify-content-center","align-items-center",
-									`${filter==item.id?'active':''}`)} 
+									`${filter===item.id?'active':''}`)} 
 									data-filter="*"
 									key={index}
 									
@@ -80,7 +72,7 @@ function NewArrivals() {
 									return  <ProductItem product={item} 
 									grid={3} key={index}
 									data_filter={filter==='all'?true:item.categoryId===filter?true:false}
-									onClick={()=>{handleAddCart(item)}}
+									onClick={()=>{cartContext.handleAddCart(item)}}
 									/>
 								})
 							}
