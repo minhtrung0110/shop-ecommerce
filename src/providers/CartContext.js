@@ -2,7 +2,7 @@ import {createContext,useState} from 'react'
 
 const CartContext=createContext()
 function CartProvider({children}) {
-    const cartItem=JSON.parse(localStorage.getItem('cart'))
+    const cartItem=JSON.parse(sessionStorage.getItem('cart'))
     const initNumCart=(!!cartItem)?cartItem: []    
     const [cart,setCart]= useState(initNumCart)
     const handleAddCart=(item) => {
@@ -24,7 +24,7 @@ function CartProvider({children}) {
             })
 			:[...prev,itemCart]
 			// luu vao gio hang
-			localStorage.setItem('cart',JSON.stringify(newArrayCart));
+			sessionStorage.setItem('cart',JSON.stringify(newArrayCart));
 			return newArrayCart })
 		
 	}
