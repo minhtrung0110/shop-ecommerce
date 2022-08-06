@@ -12,3 +12,15 @@ export const getNewArrivals = async () => {
         console.log(error);
     }
 };
+export const getProductWithID = async (id) => {
+    try {
+        const res = await request.get('products/', {
+            params: {
+               id,
+            },
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};

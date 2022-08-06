@@ -1,14 +1,28 @@
 import classNames from "classnames/bind";
 import styles from "./Cart.module.scss";
 
-import {useState } from 'react'
+import {useState,useEffect } from 'react'
+import * as productService from '~/services/productService'
 import Input from '~/components/Input'
+import CartItem from '~/components/CartItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinimize, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 const cx = classNames.bind(styles);
 function Cart() {
-    const cart=sessionStorage.getItem('cart');
+    const cart=!!sessionStorage.getItem('cart')||[];
     const [yourCart,SetYourCart]=useState(cart)
+
+    useEffect(() => {
+
+      const fetchApi = async (id) => {      
+          const product= await productService.getProductWithID(id)
+          return product
+      };
+      yourCart.map((val,index) => {  
+        const product=fetchApi(val.productId)
+         return {product:product,amount:val.amount}
+      })
+  },[])
     //xoa san pham gio hang
     const handleRemoveProductFromCart=(item) => {
 
@@ -19,6 +33,9 @@ function Cart() {
 
         // Giảm Số Lượng
     }
+
+
+    
     return ( 
      <div className={cx("cart")}>
        <section class="h-100 gradient-custom">
@@ -31,58 +48,8 @@ function Cart() {
           </div>
           <div class="card-body">
             {/* Single item */}
-            <div class="row">
-              <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                {/* Image */}
-                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                  <img src=""
-                    class="w-100" alt="Blue Jeans Jacket" />
-                  <a href="#!">
-                    <div class="mask" style={{backgroundColor:"rgba(251, 251, 251, 0.2)"}}></div>
-                  </a>
-                </div>
-                {/* Image */}
-              </div>
-
-              <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                {/* Data */}
-                <p><strong>Blue denim shirt</strong></p>
-                <p>Color: blue</p>
-                <p>Size: M</p>
-                <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
-                  title="Remove item">
-                    <FontAwesomeIcon icon={faTrash} />
-                
-                </button>
-              </div>
-
-              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                {/* Quantity */}
-                <div class="d-flex mb-4" style={{maxWidth: "300px"}}>
-                  <button class="btn btn-primary px-3 me-2"
-                   >
-                    <FontAwesomeIcon icon={faMinus} />
-                  </button>
-
-                  <div class="form-outline">
-                    <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                    <label class="form-label" for="form1">Quantity</label>
-                  </div>
-
-                  <button class="btn btn-primary px-3 ms-2"
-                   >
-                  <FontAwesomeIcon icon={faPlus} />
-                  </button>
-                </div>
-                {/* Quantity */}
-
-                {/* Price */}
-                <p class="text-start text-md-center">
-                  <strong>$17.99</strong>
-                </p>
-                {/* Price */}
-              </div>
-            </div>
+            <CartItem />
+            <CartItem />
             {/* Single item */}
 
             <hr class="my-4" />
