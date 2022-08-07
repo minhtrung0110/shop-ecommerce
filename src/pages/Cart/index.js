@@ -9,20 +9,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinimize, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 const cx = classNames.bind(styles);
 function Cart() {
-    const cart=!!sessionStorage.getItem('cart')||[];
-    const [yourCart,SetYourCart]=useState(cart)
+    const cart=JSON.parse((sessionStorage.getItem('cart')===null)?[]:sessionStorage.getItem('cart'));
+   const [productItem,setProductItem]=useState()
+   const [yourCart,setYourCart]=useState([])
 
-    useEffect(() => {
-
+  
+  useEffect(() => {
       const fetchApi = async (id) => {      
           const product= await productService.getProductWithID(id)
+       
           return product
       };
-      yourCart.map((val,index) => {  
-        const product=fetchApi(val.productId)
-         return {product:product,amount:val.amount}
-      })
+  // console.log(productItem)
+    cart.forEach(async (item) => {
+     const product= await fetchApi(item.productId)
+   //  console.log(product)
+      const Item={product:product,amount:item.amount}
+      setYourCart(prev=>[...prev,Item])
+    })
+  //  setYourCart(CartContent)
+
+    
+   
   },[])
+  //console.log(yourCart)
+ 
     //xoa san pham gio hang
     const handleRemoveProductFromCart=(item) => {
 
@@ -47,16 +58,20 @@ function Cart() {
             <h5 class="mb-0">Your Cart </h5>
           </div>
           <div class="card-body">
-            {/* Single item */}
-            <CartItem />
-            <CartItem />
-            {/* Single item */}
+           {
+            yourCart.map((item,index) => 
+            
+              {
+              // console.log(item);
+               //  return <h1>A</h1>
+                 return <CartItem key={index} product={item.product[0]} amount={item.amount}/>   
+              }
+            )
+           }
+                 
 
-            <hr class="my-4" />
 
-            {/* Single item */}
-           
-            {/* Single item */}
+          
           </div>
         </div>
         <div class="card mb-4">

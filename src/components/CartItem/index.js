@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinimize, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 const cx = classNames.bind(styles);
 
-function CartItem() {
+function CartItem({product,amount=1}) {
+  console.log(product[0])
     const handleMinus=(e) =>{     
         let item= e.target.parentElement
         let input=item;
@@ -29,7 +30,7 @@ function CartItem() {
         <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
           {/* Image */}
           <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-            <img src=""
+            <img src={product.thumbnailUrl}
               class="w-100" alt="Blue Jeans Jacket" />
             <a href="#!">
               <div class="mask" style={{backgroundColor:"rgba(251, 251, 251, 0.2)"}}></div>
@@ -40,9 +41,9 @@ function CartItem() {
 
         <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
           {/* Data */}
-          <p><strong>Blue denim shirt</strong></p>
-          <p>Color: blue</p>
-          <p>Size: M</p>
+          <p><strong>{product.name}</strong></p>
+          <p>Color: {product.color}</p>
+        
           <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
             title="Remove item">
               <FontAwesomeIcon icon={faTrash} />
@@ -77,11 +78,13 @@ function CartItem() {
           {/* Price */}
           <p class="text-start text-md-center">
           <div className={cx('title-center')}><strong> Price</strong></div> 
-           <div  className={cx('text-price')}> $17.99</div>
+           <div  className={cx('text-price')}> {product.price}</div>
           </p>
           {/* Price */}
         </div>
+        <hr class="my-4" />
       </div>
+      
      );
 }
 
