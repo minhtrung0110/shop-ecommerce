@@ -13,7 +13,6 @@ function NewArrivals() {
 	const [new_arrivals,setNew_Arrivals] = useState([])
 	const [filter,setFilter]= useState('all')
 	const cartContext = useContext(CartContext)
-	 
 	
 	useEffect(() => {
         const fetchApi = async () => {
@@ -24,6 +23,7 @@ function NewArrivals() {
         };
         fetchApi();
     },[])
+	console.log(new_arrivals)
 	
     return (
         <div className="new_arrivals">
@@ -68,7 +68,7 @@ function NewArrivals() {
 							{
 								new_arrivals.map((item, index)=>{
 									//const category=new_arrivals_category.find((obj)=> obj.id===item.categoryId )
-									
+								
 									return  <ProductItem product={item} 
 									grid={3} key={index}
 									data_filter={filter==='all'?true:item.categoryId===filter?true:false}

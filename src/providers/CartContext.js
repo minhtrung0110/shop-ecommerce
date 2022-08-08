@@ -6,14 +6,17 @@ function CartProvider({children}) {
     const initNumCart=(!!cartItem)?cartItem: []    
     const [cart,setCart]= useState(initNumCart)
     const handleAddCart=(item) => {
-		const itemCart={productId:item.id,amount:1}
+      
+        		const itemCart={productId:item.id,amount:1}
 
 		setCart(prev=> {
             // check san pham đa tồn tai trong giỏ hàng hay chưa
             const checkExistanceProduct=cart.find((obj) => {
+               
                 return obj.productId===item.id
                   
-            })           
+            })  
+               
             // xu ly tăng số lượng nếu sản phẩm đã có trong giỏ hàng nếu không thêm sản phẩm mới vào giỏ hàng
             const newArrayCart=(!!checkExistanceProduct)
             ? cart.map((obj,index) => {

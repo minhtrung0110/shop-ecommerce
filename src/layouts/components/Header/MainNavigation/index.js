@@ -19,7 +19,7 @@ function MainNavigation({nav_items=[],numCart=0}) {
         <div class="row">
             <div class="col-lg-12 text-right">
                 <div class="logo_container">
-                    <a href="#">colo<span>shop</span></a>
+                    <Link to={config.routes.home}>colo<span>shop</span></Link>
                 </div>
                 <nav class="navbar">
                     <ul class={cx("navbar_menu")}>
