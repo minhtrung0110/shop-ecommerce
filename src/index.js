@@ -1,21 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
-import GlobalStyles from '~/components/GlobalStyles';
-import App from './App'
-import store from '~/redux/store'
-import {Provider as CartProvider} from 'react-redux'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
+import GlobalStyles from "~/components/GlobalStyles";
+import App from "./App";
+import store from "~/redux/store";
+import { Provider as CartProvider } from "react-redux";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 console.log(GlobalStyles);
 root.render(
-//  <React.StrictMode>
-   <GlobalStyles>
-    <CartProvider store={store}>
-    <App/>
-    </CartProvider>
-    </GlobalStyles>
-//  </React.StrictMode>
+  <CartProvider store={store}>
+    <React.StrictMode>
+      <GlobalStyles>
+        <App />
+      </GlobalStyles>
+    </React.StrictMode>
+  </CartProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

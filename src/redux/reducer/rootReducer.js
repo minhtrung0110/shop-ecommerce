@@ -3,7 +3,9 @@ import cartReducer from "./cartReducer";
 
 const rootReducer=(state,action)=> {
     // chia thành các reducer nhỏ Slice dể dễ quản lý
-    return    cartReducer(state, action)
+    const CartContent=cartReducer(state, action)
+    localStorage.setItem('cart',JSON.stringify(CartContent))
+    return    CartContent
 }
 /*const rootReducer=combineReducers({
         filters:filtersReducer,

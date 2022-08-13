@@ -2,51 +2,17 @@ import classNames from "classnames/bind";
 import styles from "./Cart.module.scss";
 
 import {useState,useEffect } from 'react'
-import * as productService from '~/services/productService'
 import Input from '~/components/Input'
 import CartItem from '~/components/CartItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinimize, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {  } from "@fortawesome/free-solid-svg-icons";
+
 const cx = classNames.bind(styles);
+
 function Cart() {
-    const cart=JSON.parse((sessionStorage.getItem('cart')===null)?[]:sessionStorage.getItem('cart'));
-   const [productItem,setProductItem]=useState()
-   const [yourCart,setYourCart]=useState([])
-
-  
-  useEffect(() => {
-      const fetchApi = async (id) => {      
-          const product= await productService.getProductWithID(id)
-       
-          return product
-      };
-  // console.log(productItem)
-    cart.forEach(async (item) => {
-     const product= await fetchApi(item.productId)
-   //  console.log(product)
-      const Item={product:product,amount:item.amount}
-      setYourCart(prev=>[...prev,Item])
-    })
-  //  setYourCart(CartContent)
-
-    
-   
-  },[])
-  //console.log(yourCart)
- 
-    //xoa san pham gio hang
-    const handleRemoveProductFromCart=(item) => {
-
-    }
-    // cap nhat gio hang 
-    const handleUpdateProductFromCart=(item) => {
-        // Tăng Số Lượng
-
-        // Giảm Số Lượng
-    }
-
-
-    
+  const localStorageCart=JSON.parse(localStorage.getItem('cart'))
+  const [yourCart,setYourCart]=useState((!!localStorageCart)?localStorageCart:[])
+  console.log('re-render')
     return ( 
      <div className={cx("cart")}>
        <section class="h-100 gradient-custom">
@@ -62,9 +28,9 @@ function Cart() {
             yourCart.map((item,index) => 
             
               {
-              // console.log(item);
+              //console.log(item.product.product);
                //  return <h1>A</h1>
-                 return <CartItem key={index} product={item.product[0]} amount={item.amount}/>   
+                 return <CartItem key={index} product={item.product.product} amount={item.amount}/>   
               }
             )
            }

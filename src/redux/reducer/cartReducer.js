@@ -1,8 +1,6 @@
 import * as actionType from "../action/actionType";
-
-const initialState=[
-    //{product:{},amount:null},
-]
+const yourCart=JSON.parse(localStorage.getItem('cart'))
+const initialState=(!!yourCart)?yourCart:[]
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {

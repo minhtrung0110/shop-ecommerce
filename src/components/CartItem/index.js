@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./CartItem.module.scss";
-
+import {memo } from 'react'
 import {useState,useEffect } from 'react'
 import * as productService from '~/services/productService'
 import Input from '~/components/Input'
@@ -9,6 +9,9 @@ import { faMinimize, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-sv
 const cx = classNames.bind(styles);
 
 function CartItem({product,amount=1}) {
+
+
+  //console.log('re-render')
     const [quantity,setQuantity]= useState(amount)
     const handleMinus=(e) =>{     
         let item= e.target.parentElement
@@ -30,21 +33,22 @@ function CartItem({product,amount=1}) {
 
     }
     return ( 
-        <div class="row">
+      <h2>Cart Item</h2>
+     
+      /* <div class="row">
         <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-          {/* Image */}
+      
           <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-            <img src={product.thumbnailUrl}
-              class="w-100" alt="Blue Jeans Jacket" />
+           
             <a href="#!">
               <div class="mask" style={{backgroundColor:"rgba(251, 251, 251, 0.2)"}}></div>
             </a>
           </div>
-          {/* Image */}
+          
         </div>
 
         <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-          {/* Data */}
+          
           <p><strong>{product.name}</strong></p>
           <p>Color: {product.color}</p>
         
@@ -56,7 +60,7 @@ function CartItem({product,amount=1}) {
         </div>
 
         <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-          {/* Quantity */}
+         
           <label class={cx("form-label","title-center")} for="form1"><strong>Quantity</strong></label>
           <div class="d-flex mb-4" style={{maxWidth: "300px"}}>
          
@@ -77,19 +81,19 @@ function CartItem({product,amount=1}) {
             <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
-          {/* Quantity */}
+         
 
-          {/* Price */}
+          
           <p class="text-start text-md-center">
           <div className={cx('title-center')}><strong> Price</strong></div> 
            <div  className={cx('text-price')}> {product.price}</div>
           </p>
-          {/* Price */}
+         
         </div>
         <hr class="my-4" />
-      </div>
+      </div>*/
       
-     );
+     )
 }
 
-export default CartItem;
+export default memo(CartItem);
