@@ -1,1 +1,1 @@
-export const cartContextSelector = (state) => state.cartAr
+export const cartContextSelector = (state) => state

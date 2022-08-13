@@ -18,6 +18,7 @@ function NewArrivals() {
 	// cart 
 	const dispatch = useDispatch()
 	const yourCart=useSelector(cartContextSelector)
+	//console.log(yourCart)
 	
 	useEffect(() => {
         const fetchApi = async () => {

@@ -1,42 +1,45 @@
 import * as actionType from "../action/actionType";
 
-const initialState = {
-  cartAr: [],
-};
+const initialState=[
+    //{product:{},amount:null},
+]
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.ADD_PRODUCT_CART:
-      const productInCart = state.cartAr.find(
-        (p) => p.id === action.payload.id
-      );
-      // san pham chua tồn tai trong giỏ hàng
-      if (!productInCart) {
-        return {
-          cartAr: [...state.cartAr, action.payload],
-        };
-      } 
+     const checkExistanceProduct=state.find((obj) => {
+        return obj.product.id===action.payload.id
+          
+    }) 
+   //console.log(!!checkExistanceProduct)     
       // sản phẩm đã tồn tại trong giỏ hàng
+      if (!!checkExistanceProduct) {
+        const newCart=   state.map((obj,index) => {
+            console.log(obj.product.id===action.payload.id)
+            return (obj.product.id===action.payload.id) ?{
+                product:obj,
+                amount:Number(obj.amount)+1
+            } :obj
+        })
+       // console.log(newCart)
+        return newCart
+      
+        
+      } 
+      // san pham chua tồn tai trong giỏ hàng
       else {
-        let newcart = state.cartAr;
-        const objIndex = newcart.findIndex(
-          (obj) => obj.id == action.payload.id
-        );
-        if (newcart[objIndex].amount === undefined) {
-          newcart[objIndex].amount = 2;
-        } else {
-          newcart[objIndex].amount = newcart[objIndex].amount + 1;
-        }
-
-        return { cartAr: [...newcart] };
-      }
+        const newCartItem={product: action.payload,amount:1}
+        return    [...state,newCartItem]
+    }
+  
+      
     case actionType.DELETE_PRODUCT_CART:
-      let newcart = state.cartAr;
-      const objIndex = newcart.findIndex((obj) => obj.id == action.payload.id);
-      newcart.splice(objIndex, 1);
-      console.log(">>newcart", newcart);
-      return { cartAr: [...newcart]}//, totalprice: 0 };
-
+        const newCart=state
+      const objIndex = state.findIndex((obj) => obj.product.id === action.payload.id);
+      newCart.splice(objIndex, 1);
+      console.log(">>newcart", newCart);
+      return  [...newCart]//, totalprice: 0 };*/
+        
     default:
       return state;
   }

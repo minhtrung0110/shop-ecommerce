@@ -1,6 +1,7 @@
 import style from './MainNavigation.module.scss'
 import classNames from 'classnames/bind';
-import {useState,useContext } from 'react'
+import {useSelector} from 'react-redux'
+import {cartContextSelector} from '~/redux/selector/selectors'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import {  faCartPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +12,7 @@ import config from '~/config';
 const cx=classNames.bind(style);
 function MainNavigation({nav_items=[],numCart=0}) {
    // lấy giỏ hàng
+   const yourCart=useSelector(cartContextSelector)
 
 
 
@@ -36,7 +38,7 @@ function MainNavigation({nav_items=[],numCart=0}) {
                         <li class="checkout">
                            <Link to={config.routes.cart}>
                             <FontAwesomeIcon icon={faCartPlus} />
-                                <span id="checkout_items" class="checkout_items">{5}</span>
+                                <span id="checkout_items" class="checkout_items">{(!!yourCart.length)?yourCart.length:0}</span>
                             </Link>
                         </li>
                     </ul>
