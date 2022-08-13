@@ -5,11 +5,10 @@ import Banner from "~/layouts/components/Banner";
 import Newsletter from "~/layouts/components/Newsletter";
 import classNames from "classnames/bind";
 import styles from "./HomeLayout.module.scss";
-import {createContext} from "react"
+
 
 const cx = classNames.bind(styles);
 
-export const CartContext=createContext()
 
 function HomeLayout({ children }) {
   return (

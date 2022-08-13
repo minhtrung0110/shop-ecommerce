@@ -1,10 +1,13 @@
 import classNames from "classnames/bind";
 import styles from "./Arrivals.module.scss";
 import {useState,useEffect,useContext} from "react"
-import {CartContext} from '~/providers/CartContext'
+import {useDispatch,useSelector} from "react-redux";
 import * as categoryService from '~/services/categoryService'
 import * as productService from '~/services/productService'
 import ProductItem from '~/components/ProductItem'
+import {cartContextSelector} from '~/redux/selector/selectors'
+import {addProductCart} from '~/redux/action/actions'
+
 const cx = classNames.bind(styles);
 
 
@@ -12,8 +15,9 @@ function NewArrivals() {
 	const [new_arrivals_category,setNew_Arrivals_Category] = useState([])
 	const [new_arrivals,setNew_Arrivals] = useState([])
 	const [filter,setFilter]= useState('all')
-	const cartContext = useContext(CartContext)
-	 
+	// cart 
+	const dispatch = useDispatch()
+	const yourCart=useSelector(cartContextSelector)
 	
 	useEffect(() => {
         const fetchApi = async () => {
@@ -24,6 +28,9 @@ function NewArrivals() {
         };
         fetchApi();
     },[])
+	const handleAddCart=(item) => {
+			dispatch(addProductCart(item));
+	}
 	
     return (
         <div className="new_arrivals">
@@ -65,14 +72,14 @@ function NewArrivals() {
 				<div className="col">
 					<div className="product-grid row" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
 						
+						
 							{
 								new_arrivals.map((item, index)=>{
-									//const category=new_arrivals_category.find((obj)=> obj.id===item.categoryId )
-									
+									//const category=new_arrivals_category.find((obj)=> obj.id===item.categoryId )								
 									return  <ProductItem product={item} 
 									grid={3} key={index}
 									data_filter={filter==='all'?true:item.categoryId===filter?true:false}
-									onClick={()=>{cartContext.handleAddCart(item)}}
+									onClick={()=>{handleAddCart(item)}}
 									/>
 								})
 							}

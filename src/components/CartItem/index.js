@@ -9,7 +9,7 @@ import { faMinimize, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-sv
 const cx = classNames.bind(styles);
 
 function CartItem({product,amount=1}) {
-  console.log(product[0])
+    const [quantity,setQuantity]= useState(amount)
     const handleMinus=(e) =>{     
         let item= e.target.parentElement
         let input=item;
@@ -24,7 +24,11 @@ function CartItem({product,amount=1}) {
            else if(item.nodeName ==='svg') input=item.parentElement.parentNode
            input.querySelector('input[type=number]').stepUp()       
     }
-     
+    const handleChangeAmount=(e) =>{ 
+      setQuantity(e.target.value)
+      
+
+    }
     return ( 
         <div class="row">
         <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
@@ -63,7 +67,7 @@ function CartItem({product,amount=1}) {
             </button>
 
             <div class="form-outline">
-              <input id="form1" min="1" name="quantity" value="1" type="number" class="form-control" />
+              <input id="form1" min="1" name="quantity" value={quantity}onChange={(e)=>handleChangeAmount(e)} type="number" class="form-control" />
               
             </div>
 

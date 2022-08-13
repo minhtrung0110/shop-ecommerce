@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import {  faCartPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
-import {CartContext} from '~/providers/CartContext'
+
 import config from '~/config';
 
 const cx=classNames.bind(style);
 function MainNavigation({nav_items=[],numCart=0}) {
    // lấy giỏ hàng
-    const cartContext=useContext(CartContext)
+
 
 
     return ( <div class={cx("main_nav_container")}>
@@ -36,7 +36,7 @@ function MainNavigation({nav_items=[],numCart=0}) {
                         <li class="checkout">
                            <Link to={config.routes.cart}>
                             <FontAwesomeIcon icon={faCartPlus} />
-                                <span id="checkout_items" class="checkout_items">{cartContext.cart.length}</span>
+                                <span id="checkout_items" class="checkout_items">{5}</span>
                             </Link>
                         </li>
                     </ul>

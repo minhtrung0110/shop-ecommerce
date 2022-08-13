@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from '~/components/GlobalStyles';
 import App from './App'
-import { CartProvider } from './providers/CartContext';
+import store from '~/redux/store'
+import {Provider as CartProvider} from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 console.log(GlobalStyles);
 root.render(
 //  <React.StrictMode>
    <GlobalStyles>
-    <CartProvider>
+    <CartProvider store={store}>
     <App/>
     </CartProvider>
     </GlobalStyles>
