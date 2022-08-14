@@ -8,19 +8,19 @@ Github Project: https://github.com/minhtrung0110/shop-ecommerce.git
 
 > Link: https://create-react-app.dev/docs/getting-started/
 
-### 2. Add SCSS support
+### 2. Add SCSS Support
 
 ```js
 npm i --save-dev node-sass
 ```
 
-### 3. Add react router
+### 3. Add React Router
 
 ```
 npm i --save react-router-dom
 ```
 
-### 4. Add redux
+### 4. Add Redux
 
 ```
 npm i redux redux-react redux-devtools-extension
@@ -38,17 +38,21 @@ npm install --save @fortawesome/free-solid-svg-icons
 npm install --save @fortawesome/react-fontawesome
 
 ```
-### 4. Add  axios
+### 4. Add  Axios
 
 ```
 npm i axios
 ```
-### 4. Add customize-cra
+### 4. Add Customize-cra
 
 ```
 npm i customize-cra react-app-rewired --dev
 ```
+### 4. Add Formik Yup
 
+```
+npm i formik yup --dev
+```
 ## Tổ chức folder
 
 ```
