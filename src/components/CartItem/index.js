@@ -3,7 +3,7 @@ import styles from "./CartItem.module.scss";
 import {memo } from 'react'
 import {useState,useEffect } from 'react'
 import * as productService from '~/services/productService'
-import Input from '~/components/Input'
+import Input from '~/components/CustomField/InputField'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinimize, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 const cx = classNames.bind(styles);

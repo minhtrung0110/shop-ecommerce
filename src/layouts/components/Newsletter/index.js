@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./Newsletter.module.scss";
-import Input from '~/components/Input'
+import Input from '~/components/CustomField/InputField'
 const cx = classNames.bind(styles);
 
 function Newsletter() {
