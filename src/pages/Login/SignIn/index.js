@@ -16,7 +16,19 @@ function SignIn(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
-
+  // handel error
+  const message_error_email=errors.email?.type === 'required' ?  "Email is required":
+      errors.email?.type === 'pattern'&& "Email is invalid";
+  const message_error_password=errors.password?.type === 'required' ?  "Password is required":
+      errors.password?.type==='minLength'&& 'Password must be at least 8 characters'
+  const error_email={
+    message_error_email,
+    display:message_error_email?'inline-block':'none'
+  }
+  const error_password={
+    message_error_password,
+    display:message_error_password?'inline-block':'none'
+  }
   return (
     <div className={cx("limiter")}>
       <div
@@ -31,14 +43,19 @@ function SignIn(props) {
               className={cx("wrap-input100", "validate-input", "m-b-23")}
               data-validate="Username is reauired"
             >
-              <span className={cx("label-input100")}>Username</span>
+              <span className={cx("label-input100")}>Email</span>
               <input
                 className={cx("input100")}
                 type="text"
-                name="username"
-                placeholder="Type your username"
-                {...register("username")}
+                name="email"
+                placeholder="Type your email"
+                {...register("email",{
+                  required: true,
+                  pattern:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+                })}
               />
+              <span className={cx("message-error",error_email.display)}>{error_email.message_error_email}</span>
+
               <span
                 className={cx("focus-input100")}
                 data-symbol="&#xf206;"
@@ -55,8 +72,13 @@ function SignIn(props) {
                 type="password"
                 name="pass"
                 placeholder="Type your password"
-                {...register("password")}
+                {...register("password",{
+                  required: true,
+                  minLength: 8,
+
+                })}
               />
+              <span className={cx("message-error",error_password.display)}>{error_password.message_error_password}</span>
               <span
                 className={cx("focus-input100")}
                 data-symbol="&#xf190;"

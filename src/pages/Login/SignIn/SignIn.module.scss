@@ -248,7 +248,14 @@ iframe {
     position: relative;
     border-bottom: 2px solid #d9d9d9;
   }
-
+  .message-error{
+    padding-left:42px;
+    color:red;
+    display:none;
+  }
+  .inline-block{
+    display: inline-block;
+  }
   .label-input100 {
     font-size: 14px;
     color: #333333;
