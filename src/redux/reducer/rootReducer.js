@@ -4,8 +4,10 @@ import cartReducer from "./cartReducer";
 const rootReducer=(state,action)=> {
     // chia thành các reducer nhỏ Slice dể dễ quản lý
     const CartContent=cartReducer(state, action)
-    localStorage.setItem('cart',JSON.stringify(CartContent))
-    return    CartContent
+    localStorage.setItem('dataShop',JSON.stringify({ cart:CartContent,
+        user:false }))
+    return   { cart:CartContent,
+        user:false }
 }
 /*const rootReducer=combineReducers({
         filters:filtersReducer,
