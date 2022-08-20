@@ -13,3 +13,10 @@ export const deleteProductCart = (product) => {
     payload: product,
   };
 };
+export const addUserLogin = (user) => {
+  return {
+    type: actionType.ADD_USER_LOGIN,
+    payload: user
+  };
+};
+

@@ -9,7 +9,7 @@ import { Provider as CartProvider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <CartProvider store={store}>
-    <React.StrictMode>
+   <React.StrictMode>
       <GlobalStyles>
         <App />
       </GlobalStyles>

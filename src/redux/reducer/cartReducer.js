@@ -1,18 +1,18 @@
 import * as actionType from "../action/actionType";
-const yourCart=JSON.parse(localStorage.getItem('cart'))
+const yourCart=JSON.parse(localStorage.getItem('dataShop')).cart
 const initialState=(!!yourCart)?yourCart:[]
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.ADD_PRODUCT_CART:
-     const checkExistanceProduct=state.find((obj) => {
+      case actionType.ADD_PRODUCT_CART:
+     const checkExistanceProduct=state.cart.find((obj) => {
         return obj.product.id===action.payload.id
           
     }) 
    //console.log(!!checkExistanceProduct)     
       // sản phẩm đã tồn tại trong giỏ hàng
       if (!!checkExistanceProduct) {
-        const newCart=   state.map((obj,index) => {
+        const newCart=   state.cart.map((obj,index) => {
             console.log(obj.product.id===action.payload.id)
             return (obj.product.id===action.payload.id) ?{
                 product:obj,
@@ -27,19 +27,19 @@ const cartReducer = (state = initialState, action) => {
       // san pham chua tồn tai trong giỏ hàng
       else {
         const newCartItem={product: action.payload,amount:1}
-        return    [...state,newCartItem]
+        return    [...state.cart,newCartItem]
     }
   
       
     case actionType.DELETE_PRODUCT_CART:
         const newCart=state
-      const objIndex = state.findIndex((obj) => obj.product.id === action.payload.id);
+      const objIndex = state.cart.findIndex((obj) => obj.product.id === action.payload.id);
       newCart.splice(objIndex, 1);
       console.log(">>newcart", newCart);
       return  [...newCart]//, totalprice: 0 };*/
         
     default:
-      return state;
+      return state.cart;
   }
 };
 

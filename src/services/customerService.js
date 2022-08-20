@@ -1,11 +1,11 @@
 import * as request from '~/utils/httpRequest';
 
-export const checkLogin = async (email,password) => {
+export const checkLogin = async (email) => {
     try {
         const res = await request.get('customers?', {
             params: {
                email:email,
-                password:password
+
             },
         });
         return res;
