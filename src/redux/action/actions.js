@@ -19,4 +19,7 @@ export const addUserLogin = (user) => {
     payload: user
   };
 };
+export const logoutUser=  {
+    type: actionType.LOGOUT_USER,
+  };
 

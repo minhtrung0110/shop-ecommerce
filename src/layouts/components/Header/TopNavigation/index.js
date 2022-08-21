@@ -4,7 +4,18 @@ import style from "./TopNavigation.module.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import config from "~/config";
-import { faAngleDown, faRegistered, faSignIn, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faArrowRight,
+  faShoppingBag,
+  faSignIn,
+  faUserPlus
+} from "@fortawesome/free-solid-svg-icons";
+import {userLoginContextSelector} from "~/redux/selector/selectors";
+import {useSelector} from "react-redux";
+import {DropDownUserLogin} from '~/components/UserDropDown'
+import {faUserCircle} from "@fortawesome/free-regular-svg-icons";
+
 
 const cx = classNames.bind(style);
 
@@ -19,7 +30,17 @@ function TopNavigation({
   const [currency, setCurrency] = useState(
     countryCode === "VN" ? "VND" : "USD"
   );
-
+  const ItemAccountLogin=[
+    {id:1,name:'Profile',link:config.routes.profile,icon:faUserCircle},
+    {id:2,name:'Orders',link:config.routes.orders,icon:faShoppingBag},
+    {id:3,name:'Logout',link:'Logout',icon:faArrowRight },
+  ]
+  const ItemAccountNotLogin=[
+    {id:1,name:'SignIn',link:config.routes.login,icon:faSignIn},
+    {id:2,name:'Register',link:config.routes.register,icon:faUserPlus},
+  ]
+  const userLogin=useSelector(userLoginContextSelector)
+  console.log( (!!userLogin)?'dung':ItemAccountNotLogin)
   return (
     <div class="top_nav">
       <div class="container">
@@ -68,25 +89,11 @@ function TopNavigation({
                     ))}
                   </ul>
                 </li>
-                <li class="account">
-                  <a href="#">
-                    My Account
-                    <FontAwesomeIcon icon={faAngleDown} className={cx('icon-topnav')}/>
-                  </a>
-                  <ul class="account_selection">
-                    <li>
-                      <Link to={config.routes.login}>
-                      <FontAwesomeIcon icon={faSignIn} className={cx('icon-myaccount-topnav')}/>Sign In
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to={config.routes.register}>
-                      <FontAwesomeIcon icon={faUserPlus} className={cx('icon-myaccount-topnav')}/>
-                        Register
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
+                {
+
+                  (!!userLogin)?<DropDownUserLogin infoUser={userLogin} itemDropDown={ItemAccountLogin} />
+                      : <DropDownUserLogin  itemDropDown={ItemAccountNotLogin}  />
+                }
               </ul>
             </div>
           </div>

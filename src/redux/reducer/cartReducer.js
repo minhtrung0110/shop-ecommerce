@@ -1,8 +1,9 @@
 import * as actionType from "../action/actionType";
-const yourCart=JSON.parse(localStorage.getItem('dataShop')).cart
+const dataShop=localStorage.getItem('dataShop')
+const yourCart=(!!dataShop)?JSON.parse(dataShop.cart) :[]
 const initialState=(!!yourCart)?yourCart:[]
 
-const cartReducer = (state = initialState, action) => {
+const cartReducer = (state = yourCart, action) => {
   switch (action.type) {
       case actionType.ADD_PRODUCT_CART:
      const checkExistanceProduct=state.cart.find((obj) => {

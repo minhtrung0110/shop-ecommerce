@@ -16,7 +16,8 @@ const publicRoutes = [
     {path: config.routes.contact, component: <Contact/>, layout: DefaultLayout},
     {path: config.routes.cart, component: <Cart/>, layout: DefaultLayout},
     {path: config.routes.register, component: <RegisteryForm />,layout:null },
-    {path: config.routes.login, component: <SignIn />,layout:null }
+    {path: config.routes.login, component: <SignIn />,layout:null },
+    {path: config.routes.orders, component: <Profile/>,layout:null }
 ]
 
 //Private Route
