@@ -8,11 +8,13 @@ import {HomeLayout, DefaultLayout} from '~/layouts'
 import {LoginForm, RegisteryForm} from "~/components/Form";
 import SignIn from "~/pages/Login/SignIn";
 import NotFound from "~/pages/NotFound";
+import Shop from "~/pages/Shop";
 
 //Public Route
 // Những trang k cần login cũng vào được
 const publicRoutes = [
     {path: config.routes.home, component: <Home/>, layout: HomeLayout},
+    {path: config.routes.shop, component: <Shop />,layout:DefaultLayout },
     {path: config.routes.blog, component: <Blog/>, layout: DefaultLayout},
     {path: config.routes.contact, component: <Contact/>, layout: DefaultLayout},
     {path: config.routes.cart, component: <Cart/>, layout: DefaultLayout},

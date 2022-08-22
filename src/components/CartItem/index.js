@@ -19,7 +19,7 @@ function CartItem({product,qty=1}) {
         else if(item.nodeName ==='svg') input=item.parentElement.parentNode
         input.querySelector('input[type=number]').stepDown()
         dispatch(decreaseQtyCart(product.id))
-        setQuantity(prev=>prev-1)
+        setQuantity(prev=>(prev===1)?1:prev-1)
 
     }
     const handlePlus=(e) =>{     

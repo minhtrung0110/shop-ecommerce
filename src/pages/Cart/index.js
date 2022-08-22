@@ -6,11 +6,12 @@ import CartItem from '~/components/CartItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {useSelector} from "react-redux";
 import {cartContextSelector} from "~/redux/selector/selectors";
+import {faPaypal, faStripe} from "@fortawesome/free-brands-svg-icons";
 const cx = classNames.bind(styles);
 
 function Cart() {
     const yourCart=useSelector(cartContextSelector)
-    console.log(yourCart)
+   // console.log(yourCart)
 
     return ( 
      <div className={cx("cart")}>
@@ -46,18 +47,11 @@ function Cart() {
         <div class="card mb-4 mb-lg-0">
           <div class="card-body">
             <p><strong>We accept</strong></p>
-            <img class="me-2" width="45px"
-              src=""
-              alt="Visa" />
-            <img class="me-2" width="45px"
-              src=""
-              alt="American Express" />
-            <img class="me-2" width="45px"
-              src=""
-              alt="Mastercard" />
-            <img class="me-2" width="45px"
-              src=""
-              alt="PayPal acceptance mark" />
+
+            <FontAwesomeIcon icon={faStripe} />
+            <FontAwesomeIcon icon={faPaypal} />
+
+
           </div>
         </div>
       </div>
@@ -71,9 +65,15 @@ function Cart() {
               <li
                 class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                 Products
-                <span>$53.98</span>
+                <span>
+                  {
+                 yourCart.reduce((accumulator,item)=>
+                      accumulator+(item.price*item.qty)
+                  ,0)
+                }.00
+                </span>
               </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+              <li class="list-group-item d-flex sjustify-content-between align-items-center px-0">
                 Shipping
                 <span>Gratis</span>
               </li>
