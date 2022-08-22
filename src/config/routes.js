@@ -11,7 +11,8 @@ const routes = {
     register:"/register",
     cart:"/cart",
     detailProduct:"/detailproduct/@:id",
-    orders:"/orders/"
+    orders:"/orders/",
+    notfound:"/*",
    
 }
 

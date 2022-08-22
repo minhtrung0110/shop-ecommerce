@@ -1,0 +1,54 @@
+
+
+.mainbox {
+  margin:5% 28%;
+  height: 600px;
+  width: 600px;
+  position: relative;
+}
+
+.err {
+  color: red;
+  font-weight: bold;
+  font-size: 11rem;
+  position:absolute;
+  left: 20%;
+  top: 20%;
+}
+
+.far {
+  position: absolute;
+  font-size: 8.5rem;
+  color:black;
+  left: 42%;
+  top: 15%;
+}
+
+.err2 {
+  color: red;
+  font-size: 11rem;
+  position:absolute;
+  font-weight: bold;
+  left: 68%;
+  top: 20%;
+}
+
+.msg {
+  text-align: center;
+  font-size: 18px;
+  line-height:25px;
+  position:absolute;
+  left: 16%;
+  top: 45%;
+  width: 75%;
+}
+
+a {
+  text-decoration: none;
+  color: #0815a2;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}

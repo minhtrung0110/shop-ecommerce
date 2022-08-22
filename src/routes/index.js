@@ -7,6 +7,7 @@ import Cart from '~/pages/Cart'
 import {HomeLayout, DefaultLayout} from '~/layouts'
 import {LoginForm, RegisteryForm} from "~/components/Form";
 import SignIn from "~/pages/Login/SignIn";
+import NotFound from "~/pages/NotFound";
 
 //Public Route
 // Những trang k cần login cũng vào được
@@ -17,7 +18,8 @@ const publicRoutes = [
     {path: config.routes.cart, component: <Cart/>, layout: DefaultLayout},
     {path: config.routes.register, component: <RegisteryForm />,layout:null },
     {path: config.routes.login, component: <SignIn />,layout:null },
-    {path: config.routes.orders, component: <Profile/>,layout:null }
+    {path: config.routes.orders, component: <Profile/>,layout:null },
+    {path: config.routes.notfound,component:<NotFound/>, layout: null}
 ]
 
 //Private Route
