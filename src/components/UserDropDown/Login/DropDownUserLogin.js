@@ -1,7 +1,7 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
-import {faAngleDown, faSignIn, faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import {faAngleDown} from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames/bind";
 import styles from '../UserDropDown.module.scss'
 import {logoutUser} from "~/redux/action/actions";
@@ -21,7 +21,7 @@ function DropDownUserLogin ({infoUser={fullName: 'My Account'},itemDropDown=[]})
                 {
                     itemDropDown.map((item,index)=>{
                        const handleOnClick=(item.link==='Logout')?()=>dispatch(logoutUser):null
-                        console.log(handleOnClick)
+                      //  console.log(handleOnClick)
                        return (
                             <li key={index}
                             onClick={handleOnClick}

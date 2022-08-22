@@ -2,44 +2,48 @@ import classNames from "classnames/bind";
 import styles from "./CartItem.module.scss";
 import {memo } from 'react'
 import {useState,useEffect } from 'react'
-import * as productService from '~/services/productService'
-import Input from '~/components/CustomField/InputField'
+import {useDispatch} from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinimize, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {  faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {decreaseQtyCart, deleteProductCart, increaseQtyCart} from "~/redux/action/actions";
 const cx = classNames.bind(styles);
 
-function CartItem({product,amount=1}) {
+function CartItem({product,qty=1}) {
 
-
-  //console.log('re-render')
-    const [quantity,setQuantity]= useState(amount)
+    const [quantity,setQuantity]= useState(qty)
+    const dispatch=useDispatch()
     const handleMinus=(e) =>{     
         let item= e.target.parentElement
         let input=item;
         if(item.nodeName ==='BUTTON') input=item.parentNode
         else if(item.nodeName ==='svg') input=item.parentElement.parentNode
-        input.querySelector('input[type=number]').stepDown()        
+        input.querySelector('input[type=number]').stepDown()
+        dispatch(decreaseQtyCart(product.id))
+        setQuantity(prev=>prev-1)
+
     }
     const handlePlus=(e) =>{     
            let item= e.target.parentElement
            let input=item;
            if(item.nodeName ==='BUTTON') input=item.parentNode
            else if(item.nodeName ==='svg') input=item.parentElement.parentNode
-           input.querySelector('input[type=number]').stepUp()       
+           input.querySelector('input[type=number]').stepUp()
+        dispatch(increaseQtyCart(product.id))
+        setQuantity(prev=>prev+1)
     }
     const handleChangeAmount=(e) =>{ 
       setQuantity(e.target.value)
-      
-
     }
-    return ( 
-      <h2>Cart Item</h2>
-     
-      /* <div class="row">
+    const handleRemoveCartItem=(id)=>{
+        dispatch(deleteProductCart(id))
+    }
+    return (
+      <div class="row">
         <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
       
           <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-           
+              <img src={product.thumbnailUrl}
+                   className="w-100" alt="Blue Jeans Jacket"/>
             <a href="#!">
               <div class="mask" style={{backgroundColor:"rgba(251, 251, 251, 0.2)"}}></div>
             </a>
@@ -53,7 +57,7 @@ function CartItem({product,amount=1}) {
           <p>Color: {product.color}</p>
         
           <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
-            title="Remove item">
+            title="Remove item" onClick={()=>handleRemoveCartItem(product.id)}>
               <FontAwesomeIcon icon={faTrash} />
           
           </button>
@@ -71,7 +75,7 @@ function CartItem({product,amount=1}) {
             </button>
 
             <div class="form-outline">
-              <input id="form1" min="1" name="quantity" value={quantity}onChange={(e)=>handleChangeAmount(e)} type="number" class="form-control" />
+              <input id="form1" min="1" name="quantity" value={quantity} onChange={(e)=>handleChangeAmount(e)} type="number" class="form-control" />
               
             </div>
 
@@ -91,7 +95,7 @@ function CartItem({product,amount=1}) {
          
         </div>
         <hr class="my-4" />
-      </div>*/
+      </div>
       
      )
 }

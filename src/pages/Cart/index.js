@@ -1,18 +1,17 @@
 import classNames from "classnames/bind";
 import styles from "./Cart.module.scss";
-
 import {useState,useEffect } from 'react'
 import Input from '~/components/CustomField/InputField'
 import CartItem from '~/components/CartItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  } from "@fortawesome/free-solid-svg-icons";
-
+import {useSelector} from "react-redux";
+import {cartContextSelector} from "~/redux/selector/selectors";
 const cx = classNames.bind(styles);
 
 function Cart() {
-  const localStorageCart=JSON.parse(localStorage.getItem('cart'))
-  const [yourCart,setYourCart]=useState((!!localStorageCart)?localStorageCart:[])
-  console.log('re-render')
+    const yourCart=useSelector(cartContextSelector)
+    console.log(yourCart)
+
     return ( 
      <div className={cx("cart")}>
        <section class="h-100 gradient-custom">
@@ -28,9 +27,7 @@ function Cart() {
             yourCart.map((item,index) => 
             
               {
-              //console.log(item.product.product);
-               //  return <h1>A</h1>
-                 return <CartItem key={index} product={item.product.product} amount={item.amount}/>   
+                 return <CartItem key={index} product={item} qty={item.qty}/>
               }
             )
            }

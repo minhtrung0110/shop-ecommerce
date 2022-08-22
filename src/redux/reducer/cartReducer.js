@@ -1,43 +1,57 @@
 import * as actionType from "../action/actionType";
-const dataShop=localStorage.getItem('dataShop')
-const yourCart=(!!dataShop)?JSON.parse(dataShop.cart) :[]
+const dataShop=JSON.parse(localStorage.getItem('dataShop'))
+const yourCart=(!!dataShop)?dataShop.cart:[]
 const initialState=(!!yourCart)?yourCart:[]
 
 const cartReducer = (state = yourCart, action) => {
   switch (action.type) {
       case actionType.ADD_PRODUCT_CART:
-     const checkExistanceProduct=state.cart.find((obj) => {
-        return obj.product.id===action.payload.id
-          
-    }) 
-   //console.log(!!checkExistanceProduct)     
+          const inCart = state.cart.find((item) =>
+              item.id === action.payload.id ? true : false
+          );
+          return  (inCart)
+              ? state.cart.map((item) =>
+                  item.id === action.payload.id
+                      ? { ...item,  qty: item.qty + 1 }
+                      : item
+              )
+              : [...state.cart, {...action.payload, qty: 1 }]
+   //console.log(state)
       // sản phẩm đã tồn tại trong giỏ hàng
-      if (!!checkExistanceProduct) {
-        const newCart=   state.cart.map((obj,index) => {
-            console.log(obj.product.id===action.payload.id)
-            return (obj.product.id===action.payload.id) ?{
-                product:obj,
+     /* if (!!checkExistanceProduct) {
+        const newCart=   state.cart.map((obj) => {
+           // console.log(obj.product.id===action.payload.id)
+            if (obj.product.id===action.payload.id) {
+                console.log({
+                    product:obj,
+                    amount:Number(obj.amount)+1
+                })
+                return {
+                ...obj,
                 amount:Number(obj.amount)+1
-            } :obj
-        })
-       // console.log(newCart)
-        return newCart
-      
-        
-      } 
+            }} else console.log('case 2')
+        })*/
       // san pham chua tồn tai trong giỏ hàng
-      else {
+     /* else {
         const newCartItem={product: action.payload,amount:1}
         return    [...state.cart,newCartItem]
-    }
-  
-      
-    case actionType.DELETE_PRODUCT_CART:
-        const newCart=state
-      const objIndex = state.cart.findIndex((obj) => obj.product.id === action.payload.id);
-      newCart.splice(objIndex, 1);
-      console.log(">>newcart", newCart);
-      return  [...newCart]//, totalprice: 0 };*/
+    }*/
+      case actionType.INCREASEE_QTY_CART:
+          return state.cart.map((item) =>
+              item.id === action.payload
+                  ? { ...item,  qty: item.qty + 1 }
+                  : item
+          )
+      case actionType.DECREASEE_QTY_CART:
+          return state.cart.map((item) =>
+              item.id === action.payload
+                  ? { ...item,  qty: item.qty - 1 }
+                  : item
+          )
+
+      case actionType.DELETE_PRODUCT_CART:
+        return  state.cart.filter((item) => item.id !== action.payload)
+
         
     default:
       return state.cart;

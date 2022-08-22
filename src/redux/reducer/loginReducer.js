@@ -1,6 +1,6 @@
 import * as actionType from "../action/actionType";
-const dataShop=localStorage.getItem('dataShop')
-const initialState=(!!dataShop)?JSON.parse(dataShop.user) :[]
+const dataShop=JSON.parse(localStorage.getItem('dataShop'))
+const initialState=(!!dataShop)?dataShop.user :[]
 
 const loginReducer = (state = initialState, action) => {
     switch (action.type) {

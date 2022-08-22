@@ -76,11 +76,19 @@ function NewArrivals() {
 						
 							{
 								new_arrivals.map((item, index)=>{
-									//const category=new_arrivals_category.find((obj)=> obj.id===item.categoryId )								
+									const itemCart= {
+										categoryId: item.categoryId,
+										color: item.color,
+										description: item.description,
+										id: item.id,
+										name: item.name,
+										price: item.price,
+										thumbnailUrl: item.thumbnailUrl
+									}
 									return  <ProductItem product={item} 
 									grid={3} key={index}
-									data_filter={filter==='all'?true:item.categoryId===filter?true:false}
-									onClick={()=>{handleAddCart(item)}}
+									data_filter={filter==='all'?true:item.categoryId === filter}
+									onClick={()=>{handleAddCart(itemCart)}}
 									/>
 								})
 							}

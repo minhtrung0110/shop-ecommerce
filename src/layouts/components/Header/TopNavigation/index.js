@@ -40,7 +40,7 @@ function TopNavigation({
     {id:2,name:'Register',link:config.routes.register,icon:faUserPlus},
   ]
   const userLogin=useSelector(userLoginContextSelector)
-  console.log( (!!userLogin)?'dung':ItemAccountNotLogin)
+ // console.log( (!!userLogin)?'dung':ItemAccountNotLogin)
   return (
     <div class="top_nav">
       <div class="container">
