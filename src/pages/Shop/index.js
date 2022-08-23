@@ -35,7 +35,7 @@ function Home() {
         <div className="container">
             <div className="row">
                 <div className="col text-center">
-                    <div className="section_title new_arrivals_title">
+                    <div className={cx("section_title","list_products_title")}>
                         <h2>List Products</h2>
                     </div>
                 </div>

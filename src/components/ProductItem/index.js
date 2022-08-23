@@ -29,7 +29,9 @@ function ProductItem({product,grid=4,data_filter=true,onClick}) {
         </div>
         <div className={cx("product_bubble","product_bubble_right product_bubble_red d-flex","flex-column","align-items-center")}><span>-$20</span></div>
         <div className={cx("product_info")}>
-            <h6 className={cx("product_name")}><Link to={config.routes.detailProduct}>{product.name}</Link></h6>
+            <h6 className={cx("product_name")}>
+                <Link to={`${config.routes.detailProductWithoutId}${product.id}`}>{product.name}</Link>
+            </h6>
             <div className={cx("product_price")}>{product.price}</div>
         </div>
     </div>

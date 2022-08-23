@@ -10,3 +10,15 @@ export const getCategories = async () => {
         console.log(error);
     }
 };
+export const getCategoryWithId = async (id) => {
+    try {
+        const res = await request.get('categories/', {
+            params: {
+                id,
+            },
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};

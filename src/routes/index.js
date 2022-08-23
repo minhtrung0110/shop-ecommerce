@@ -9,6 +9,7 @@ import {LoginForm, RegisteryForm} from "~/components/Form";
 import SignIn from "~/pages/Login/SignIn";
 import NotFound from "~/pages/NotFound";
 import Shop from "~/pages/Shop";
+import ProductDetail from "~/pages/ProductDetail";
 
 //Public Route
 // Những trang k cần login cũng vào được
@@ -21,7 +22,8 @@ const publicRoutes = [
     {path: config.routes.register, component: <RegisteryForm />,layout:null },
     {path: config.routes.login, component: <SignIn />,layout:null },
     {path: config.routes.orders, component: <Profile/>,layout:null },
-    {path: config.routes.notfound,component:<NotFound/>, layout: null}
+    {path: config.routes.notfound,component:<NotFound/>, layout: null},
+    {path:config.routes.detailProduct,component: <ProductDetail />,layout: DefaultLayout},
 ]
 
 //Private Route
