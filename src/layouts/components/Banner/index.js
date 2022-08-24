@@ -5,23 +5,25 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import config from "~/config";
 import * as categoryService  from '~/services/categoryService';
+import BannerLoader from "~/components/Loading/Banner";
 
 const cx=classNames.bind(style)
 
 
 function Banner() {
     const [categories,setCategories]= useState([])
+    const [loading,setLoading] =useState(true)
     useEffect(() => {
         const fetchApi = async () => {
-
             const result = await categoryService.getCategories();
             setCategories(result);
+           setLoading(false)
         };
         fetchApi();
     },[])
-    
-    //console.log(categories)
-    return ( <div class={cx("banner")}>
+
+    return  (loading)? <BannerLoader style={{width:'100%'}} />:
+    ( <div class={cx("banner")}>
     <div class="container">
         <div class="row">
             {

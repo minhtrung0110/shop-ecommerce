@@ -8,6 +8,7 @@ import ProductItem from "~/components/ProductItem";
 import {addProductCart} from "~/redux/action/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {cartContextSelector} from "~/redux/selector/selectors";
+import ListProductsLoader from "~/components/Loading/ListProduct";
 
 
 const cx = classNames.bind(styles);
@@ -16,6 +17,7 @@ function Home() {
     const [categories,setCategories] = useState([])
     const [listProducts,setListProducts] = useState([])
     const [filter,setFilter]= useState('all')
+    const [loading,setLoading] = useState(true)
     const dispatch = useDispatch()
     const yourCart=useSelector(cartContextSelector)
     useEffect(() => {
@@ -24,6 +26,7 @@ function Home() {
             setCategories(result);
             const NewArrivals= await productService.getAllProduct();
             setListProducts(NewArrivals);
+            setLoading(false)
         };
         fetchApi();
     },[])
@@ -31,7 +34,8 @@ function Home() {
         dispatch(addProductCart(item));
     }
 
-    return (
+    return (loading)? <ListProductsLoader style={{width:'100%' ,marginTop:'200px'}}  />:
+    (
         <div className="container">
             <div className="row">
                 <div className="col text-center">

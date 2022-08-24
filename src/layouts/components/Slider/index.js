@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import config from "~/config";
 import BtnSlider from "./BtnSlider"
 import * as sliderService from '~/services/sliderService'
+import SlideLoader from "~/components/Loading/SlideLoader";
 
 
 
@@ -14,6 +15,7 @@ const cx=classNames.bind(style);
 function Slider({arr_images}) {
 	const [dataSlider,setDataSliders]=useState([])
 	const [slideIndex, setSlideIndex] = useState(1)
+	const [loading,setLoading] = useState(true)
 	const timeoutRef = useRef(null);
 
 		
@@ -50,8 +52,10 @@ function Slider({arr_images}) {
 
 			const result = await sliderService.getSliders();
 			setDataSliders(result);
+			setLoading(false)
 		};
 		fetchApi();
+
 		resetTimeout();
 		timeoutRef.current = setTimeout(
 		  () =>
@@ -70,7 +74,8 @@ function Slider({arr_images}) {
 		  resetTimeout();
 		};
 	  }, []);
-    return ( 
+    return (loading)?<SlideLoader/> :
+	(
 	<div className={cx("main_slider")}>
 		{dataSlider.map((obj, index) => {
 			return (

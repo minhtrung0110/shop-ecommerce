@@ -7,6 +7,7 @@ import * as productService from '~/services/productService'
 import ProductItem from '~/components/ProductItem'
 import {cartContextSelector} from '~/redux/selector/selectors'
 import {addProductCart} from '~/redux/action/actions'
+import NewArrivalsLoader from "~/components/Loading/NewArrivals";
 
 const cx = classNames.bind(styles);
 
@@ -15,6 +16,7 @@ function NewArrivals() {
 	const [new_arrivals_category,setNew_Arrivals_Category] = useState([])
 	const [new_arrivals,setNew_Arrivals] = useState([])
 	const [filter,setFilter]= useState('all')
+	const [loading,setLoading]=useState(true)
 	// cart 
 	const dispatch = useDispatch()
 	const yourCart=useSelector(cartContextSelector)
@@ -26,6 +28,7 @@ function NewArrivals() {
 			setNew_Arrivals_Category(result);
 			const NewArrivals= await productService.getNewArrivals();
 			setNew_Arrivals(NewArrivals);
+			setLoading(false)
         };
         fetchApi();
     },[])
@@ -33,7 +36,8 @@ function NewArrivals() {
 			dispatch(addProductCart(item));
 	}
 	
-    return (
+    return (loading)? <NewArrivalsLoader style={{width:'100%'}} />:
+	(
         <div className="new_arrivals">
 		<div className="container">
 			<div className="row">
