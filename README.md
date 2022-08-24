@@ -25,12 +25,12 @@ npm i --save react-router-dom
 ```
 npm i redux redux-react redux-devtools-extension
 ```
-### 4. Add Classnames
+### 5. Add Classnames
 
 ```
 npm i classnames
 ```
-### 4. Add Font Awesome
+### 6. Add Font Awesome
 
 ```
 npm i --save @fortawesome/fontawesome-svg-core
@@ -38,28 +38,38 @@ npm install --save @fortawesome/free-solid-svg-icons
 npm install --save @fortawesome/react-fontawesome
 
 ```
-### 4. Add  Axios
+### 7. Add  Axios
 
 ```
 npm i axios
 ```
-### 4. Add Customize-cra
+### 8. Add Customize-cra
 
 ```
 npm i customize-cra react-app-rewired --dev
 ```
-### 4. Add Formik Yup
+### 9. Add Formik Yup
 
 ```
 npm i formik yup --dev
+```
+### 10. Add React-Hook-Form
+
+```
+npm i react-hook-form
+```
+### 11. Add React-Content-Loader
+
+```
+npm i react-content-loader
 ```
 ## Tổ chức folder
 
 ```
 src
-|__ assets
-|__ components
-|__ config
+|__assets
+|__components
+|__config
 |__layouts
 |__pages
 |__redux
@@ -67,6 +77,8 @@ src
 |__services
 |__utils
 
+- Cầu trúc này còn rất nhiều điểm hạn chế và nhiều khuyết điểm 
+- Không nên kế thừa và sử dụng cấu trúc này nên tuỳ biến lại
 ```
 
 ## Tổ chức routing
