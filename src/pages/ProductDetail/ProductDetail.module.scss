@@ -114,33 +114,6 @@
 {
   margin-top: 12px;
 }
-.free_delivery
-{
-  background: #f5f5f5;
-  margin-top: 53px;
-}
-.free_delivery i
-{
-  display: inline-block;
-}
-.free_delivery span:last-child
-{
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  text-transform: uppercase;
-}
-.free_delivery span:first-child
-{
-  display: inline-block;
-  margin-right: 19px;
-  font-size: 16px;
-  -webkit-transform: translateY(-1px);
-  -moz-transform: translateY(-1px);
-  -ms-transform: translateY(-1px);
-  -o-transform: translateY(-1px);
-  transform: translateY(-1px);
-}
 .original_price
 {
   font-weight: 500;
@@ -156,22 +129,21 @@
   color: #fe4c50;
   font-weight: 500;
   line-height: 30px;
-  margin-top: 2px;
+  margin-top: 15px;
 }
-.star_rating
-{
+.star_rating {
   display: inline-block;
   margin-left: 33px;
-}
-.star_rating li
-{
-  display: inline-block;
-  margin-right: -2px;
-  cursor: pointer;
-}
-.star_rating li i
-{
-  color: #fac451;
+
+  .list-item {
+    display: inline-block;
+    margin-right: 2px;
+    cursor: pointer;
+    .star {
+      color: #fac451;
+    }
+  }
+
 }
 .product_color
 {
@@ -234,6 +206,13 @@
   width: 160px;
   margin-left: 19px;
   font-size: 12px !important;
+  .text-title{
+    color:#fff;
+    font-weight: 500;
+    font-size: 15px ;
+    text-transform: uppercase;
+    line-height:18px;
+  }
 }
 .product_favorite
 {

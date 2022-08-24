@@ -6,7 +6,12 @@ export const addProductCart = (product) => {
     payload: product,
   };
 };
-
+export const addProductCartWithQuantity = (product,quantity) => {
+  return {
+    type: actionType.ADD_PRODUCT_CART_WITH_QUANTITY,
+    payload: {product,quantity}
+  };
+};
 export const deleteProductCart = (id) => {
   return {
     type: actionType.DELETE_PRODUCT_CART,

@@ -16,6 +16,17 @@ const cartReducer = (state = yourCart, action) => {
                       : item
               )
               : [...state.cart, {...action.payload, qty: 1 }]
+      case actionType.ADD_PRODUCT_CART_WITH_QUANTITY:
+          const existCart = state.cart.find((item) =>
+              item.id === action.payload.product.id ? true : false
+          );
+          return  (existCart)
+              ? state.cart.map((item) =>
+                  item.id === action.payload.product.id
+                      ? { ...item,  qty: item.qty + action.payload.quantity }
+                      : item
+              )
+              : [...state.cart, {...action.payload.product, qty:action.payload.quantity }]
    //console.log(state)
       // sản phẩm đã tồn tại trong giỏ hàng
      /* if (!!checkExistanceProduct) {

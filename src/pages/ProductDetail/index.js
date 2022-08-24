@@ -6,23 +6,27 @@ import classNames from "classnames/bind";
 import * as categoryService from "~/services/categoryService";
 import * as productService from "~/services/productService";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAngleRight, faSpinner} from "@fortawesome/free-solid-svg-icons";
+import {faAngleRight, faMinus, faSpinner, faStar,faPlus} from "@fortawesome/free-solid-svg-icons";
 import config from "~/config";
 import ProductDetailLoader from '~/components/Loading/ProductDetailLoader'
+import {useDispatch} from "react-redux";
+import {addProductCartWithQuantity} from "~/redux/action/actions";
 
 ProductDetail.propTypes = {
 
 };
 const cx = classNames.bind(styles)
-
-
-
 function ProductDetail(props) {
     const [product,setProduct] = useState()
     const [category,setCategory] = useState()
     const [loading,setLoading] = useState(true)
+    const [quantity,setQuantity] = useState(1)
     const {id}=useParams()
     const idProduct={id}
+
+    //redux
+    const dispatch=useDispatch()
+
    // console.log(idProduct.id)
     useEffect(() => {
         const fetchApi = async () => {
@@ -37,6 +41,10 @@ function ProductDetail(props) {
         fetchApi();
     },[])
 
+    const handleOnClickAddCart=()=>{
+        dispatch(addProductCartWithQuantity(product,quantity))
+    }
+    console.log(quantity)
 
     return (loading)? <ProductDetailLoader />: (
            <div className={cx("container","single_product_container")}>
@@ -68,10 +76,10 @@ function ProductDetail(props) {
                </div>
                <div className="row">
                    <div className="col-lg-7">
-                       <div className="single_product_pics">
+                       <div className={cx("single_product_pics")}>
                            <div className="row">
-                               <div className="col-lg-3 thumbnails_col order-lg-1 order-2">
-                                   <div className="single_product_thumbnails">
+                               <div className={cx("col-lg-3","thumbnails_col","order-lg-1","order-2")}>
+                                   <div className={cx("single_product_thumbnails")}>
                                        <ul>
                                            <li><img src={product.thumbnailUrl} alt="AAA"
                                                     />
@@ -79,51 +87,48 @@ function ProductDetail(props) {
                                        </ul>
                                    </div>
                                </div>
-                               <div className="col-lg-9 image_col order-lg-2 order-1">
-                                   <div className="single_product_image">
-                                       <div className="single_product_image_background"
-                                            ></div>
+                               <div className={cx("col-lg-9","image_col","order-lg-2","order-1")}>
+                                   <div className={cx("single_product_image")}>
+                                       <div className={cx("single_product_image_background")}
+                                            style={{backgroundImage:`url(${product.thumbnailUrl})`}}    ></div>
                                    </div>
                                </div>
                            </div>
                        </div>
                    </div>
                    <div className="col-lg-5">
-                       <div className="product_details">
-                           <div className="product_details_title">
+                       <div className={cx("product_details")}>
+                           <div className={cx("product_details_title")}>
                                <h2>{product.name}</h2>
                                <p>{product.description}</p>
                            </div>
-                           <div className="free_delivery d-flex flex-row align-items-center justify-content-center">
-                               <span className="ti-truck"></span><span>free delivery</span>
-                           </div>
-                           <div className="product_price">{product.price}</div>
-                           <ul className="star_rating">
-                               <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                               <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                               <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                               <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                               <li><i className="fa fa-star-o" aria-hidden="true"></i></li>
-                           </ul>
-                           <div className="product_color">
-                               <span>Select Color:</span>
-                               <ul>
-                                   <li style={{background: '#e54e5d'}}></li>
-                                   <li style={{background: '#e54e5d'}}></li>
-                                   <li style={{background: '#e54e5d'}}></li>
 
-                               </ul>
-                           </div>
-                           <div className="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                           <div className={cx("product_price")}>{product.price}</div>
+                           <ul className={cx("star_rating")}>
+                               <li className={cx('list-item')}><FontAwesomeIcon icon={faStar} className={cx('star')}/></li>
+                               <li className={cx('list-item')}><FontAwesomeIcon icon={faStar} className={cx('star')}/></li>
+                               <li className={cx('list-item')}><FontAwesomeIcon icon={faStar} className={cx('star')}/></li>
+                               <li className={cx('list-item')}><FontAwesomeIcon icon={faStar} className={cx('star')}/></li>
+                               <li className={cx('list-item')}><FontAwesomeIcon icon={faStar} className={cx('star')}/></li>
+
+                           </ul>
+
+                           <div className={cx("quantity","d-flex","flex-column","flex-sm-row","align-items-sm-center")}>
                                <span>Quantity:</span>
-                               <div className="quantity_selector">
-                                   <span className="minus"><i className="fa fa-minus" aria-hidden="true"></i></span>
-                                   <span id="quantity_value">1</span>
-                                   <span className="plus"><i className="fa fa-plus" aria-hidden="true"></i></span>
+                               <div className={cx("quantity_selector")}>
+                                   <span className={cx("minus")}
+                                   onClick={()=>setQuantity(prev=>prev===1?1:prev-1)}
+                                   ><FontAwesomeIcon icon={faMinus}/></span>
+                                   <span id="quantity_value">{quantity}</span>
+                                   <span className={cx("plus")}
+                                         onClick={()=>setQuantity(prev=>prev+1)}
+                                   ><FontAwesomeIcon icon={faPlus}/></span>
                                </div>
-                               <div className="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                               <button className={cx("red_button","add_to_cart_button")} onClick={handleOnClickAddCart}>
+                                   <span className={cx('text-title')}>add to cart</span>
+                               </button>
                                <div
-                                   className="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+                                   className={cx("product_favorite","d-flex","flex-column","align-items-center","justify-content-center")}></div>
                            </div>
                        </div>
                    </div>

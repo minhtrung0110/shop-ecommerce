@@ -3,7 +3,7 @@ import ContentLoader from 'react-content-loader'
 
 function ProductDetailLoader({props}){
     return (
-        <ContentLoader viewBox="0 0 800 400" style={{marginLeft:'170px'}} height={1000} width={1080} {...props}>
+        <ContentLoader viewBox="0 0 800 400" style={{marginLeft:'190px'}} height={1000} width={1080} {...props}>
             <circle cx="472" cy="159" r="7" />
             <rect x="487" y="154" rx="5" ry="5" width="220" height="10" />
             <circle cx="472" cy="190" r="7" />
