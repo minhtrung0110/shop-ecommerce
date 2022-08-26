@@ -9,27 +9,47 @@ import {addProductCart} from "~/redux/action/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {cartContextSelector} from "~/redux/selector/selectors";
 import ListProductsLoader from "~/components/Loading/ListProduct";
+import Pagination from "~/components/Pagination";
 
 
 const cx = classNames.bind(styles);
 
-function Home() {
+function Shop() {
     const [categories,setCategories] = useState([])
     const [listProducts,setListProducts] = useState([])
     const [filter,setFilter]= useState('all')
     const [loading,setLoading] = useState(true)
+    const [pagination,setPagination] = useState({
+        "_page": 1,
+        "_limit":8,
+        "_totalRows": 100
+    })
+
+    const [filterGetProducts,setFilterGetProducts] = useState({
+        "_page": 1,
+        "_limit":8,
+    })
+    const handlePageChange=(newPage)=>{
+        console.log(newPage)
+        setFilterGetProducts({
+            ...filterGetProducts,
+            _page: newPage
+        })
+    }
     const dispatch = useDispatch()
     const yourCart=useSelector(cartContextSelector)
     useEffect(() => {
         const fetchApi = async () => {
             const result = await categoryService.getCategories();
             setCategories(result);
-            const NewArrivals= await productService.getAllProduct();
-            setListProducts(NewArrivals);
+            const products = await productService.getAllProduct(filterGetProducts._page,filterGetProducts._limit);
+            console.log(products)
+            setListProducts(products.data);
+            setPagination(products.pagination)
             setLoading(false)
         };
         fetchApi();
-    },[])
+    },[filterGetProducts])
     const handleAddCart=(item) => {
         dispatch(addProductCart(item));
     }
@@ -99,6 +119,11 @@ function Home() {
                     </div>
                 </div>
             </div>
+            <div className="row">
+                <div className="col">
+                    <Pagination pagination={pagination}  onPageChange={handlePageChange} />
+                </div>
+            </div>
 
         </div>
 
@@ -107,4 +132,4 @@ function Home() {
         );
 }
 
-export default Home;
+export default Shop;

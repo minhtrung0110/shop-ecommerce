@@ -14,9 +14,9 @@ export const getNewArrivals = async () => {
 };
 export const getProductWithID = async (id) => {
     try {
-        const res = await request.get('products/', {
+        const res = await request.get('products/',{
             params: {
-               id,
+              id,
             },
         });
         return res;
@@ -24,9 +24,14 @@ export const getProductWithID = async (id) => {
         console.log(error);
     }
 };
-export const getAllProduct = async () => {
+export const getAllProduct = async (_page,_limit) => {
     try {
-        const res = await request.get('products/');
+        const res = await request.get('products?',{
+            params: {
+                _page,
+                _limit
+            },
+        });
         return res;
     } catch (error) {
         console.log(error);
