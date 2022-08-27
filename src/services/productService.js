@@ -24,13 +24,21 @@ export const getProductWithID = async (id) => {
         console.log(error);
     }
 };
-export const getAllProduct = async (_page,_limit) => {
+export const getAllProduct = async (categoryId,_page,_limit) => {
+    const paramsCondition=(categoryId==='all')?
+        {
+            _page,
+            _limit,
+        }
+        :{
+                categoryId,
+                _page,
+                _limit,
+            }
+    //console.log(paramsCondition)
     try {
         const res = await request.get('products?',{
-            params: {
-                _page,
-                _limit
-            },
+       params: paramsCondition
         });
         return res;
     } catch (error) {

@@ -26,23 +26,35 @@ function Shop() {
     })
 
     const [filterGetProducts,setFilterGetProducts] = useState({
+        "_categoryId":'all',
         "_page": 1,
         "_limit":8,
     })
+    const dispatch=useDispatch()
     const handlePageChange=(newPage)=>{
-        console.log(newPage)
+
         setFilterGetProducts({
             ...filterGetProducts,
+            _categoryId: filter,
             _page: newPage
         })
+        setLoading(true)
+        console.log(filterGetProducts)
     }
-    const dispatch = useDispatch()
+    const handleFilterCategoryChange=(newCategory)=>{
+        setFilter(newCategory)
+        setFilterGetProducts(
+            {...filterGetProducts,
+            _categoryId: newCategory,
+            _page: 1}
+        )
+    }
     const yourCart=useSelector(cartContextSelector)
     useEffect(() => {
         const fetchApi = async () => {
             const result = await categoryService.getCategories();
             setCategories(result);
-            const products = await productService.getAllProduct(filterGetProducts._page,filterGetProducts._limit);
+            const products = await productService.getAllProduct(filterGetProducts._categoryId,filterGetProducts._page,filterGetProducts._limit);
             console.log(products)
             setListProducts(products.data);
             setPagination(products.pagination)
@@ -72,7 +84,7 @@ function Shop() {
                             <li className={cx("grid_sorting_button","button","d-flex","flex-column","justify-content-center","align-items-center",
                                 `${filter==='all'?'active':''}`)}
                                 data-filter="*"
-                                onClick={()=>setFilter('all')}
+                                onClick={()=>handleFilterCategoryChange('all')}
                             >all</li>
                             {
                                 categories.map((item, index)=>(
@@ -81,7 +93,7 @@ function Shop() {
                                         data-filter="*"
                                         key={index}
 
-                                        onClick={()=>{ setFilter(item.id)}}
+                                        onClick={()=>{ handleFilterCategoryChange(item.id)}}
                                     >
                                         {item.name}
                                     </li>

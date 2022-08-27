@@ -6,7 +6,7 @@ import config from "~/config"
 
 const cx = classNames.bind(styles);
 
-function ProductItem({product,grid=4,data_filter=true,onClick}) {
+function ProductItem({product,grid=4,onClick}) {
   //  console.log(onClick)
     const [cart,setCart]=useState([])
     const hanleAddCart=()=> {
@@ -22,7 +22,8 @@ function ProductItem({product,grid=4,data_filter=true,onClick}) {
     }
     return ( 	
     <div className={cx('product-item', `col-md-${grid}`)}
-    style={{display: `${data_filter?'block':'none'}`}} >
+   // style={{display: `${data_filter?'block':'none'}`}} >
+        >
     <div className={cx("product","discount","product_filter")}>
         <div className={cx("product_image")}>
             <img className={cx('img')} src={product.thumbnailUrl} alt=""/>
