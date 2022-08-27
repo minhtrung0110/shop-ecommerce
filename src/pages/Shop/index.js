@@ -22,7 +22,7 @@ function Shop() {
     const [pagination,setPagination] = useState({
         "_page": 1,
         "_limit":8,
-        "_totalRows": 100
+        "_totalRows": 100,
     })
 
     const [filterGetProducts,setFilterGetProducts] = useState({
@@ -39,7 +39,7 @@ function Shop() {
             _page: newPage
         })
         setLoading(true)
-        console.log(filterGetProducts)
+       // console.log(filterGetProducts)
     }
     const handleFilterCategoryChange=(newCategory)=>{
         setFilter(newCategory)
@@ -55,7 +55,7 @@ function Shop() {
             const result = await categoryService.getCategories();
             setCategories(result);
             const products = await productService.getAllProduct(filterGetProducts._categoryId,filterGetProducts._page,filterGetProducts._limit);
-            console.log(products)
+          ///  console.log(products)
             setListProducts(products.data);
             setPagination(products.pagination)
             setLoading(false)
