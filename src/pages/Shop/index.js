@@ -58,7 +58,7 @@ function Shop() {
           ///  console.log(products)
             setListProducts(products.data);
             setPagination(products.pagination)
-            setLoading(false)
+           setLoading(false)
         };
         fetchApi();
     },[filterGetProducts])
@@ -66,7 +66,7 @@ function Shop() {
         dispatch(addProductCart(item));
     }
 
-    return (loading)? <ListProductsLoader style={{width:'100%' ,marginTop:'200px'}}  />:
+    return (loading)? <ListProductsLoader style={{width:'100%' ,marginTop:'150px'}}  />:
     (
         <div className="container">
             <div className="row">

@@ -63,6 +63,11 @@ npm i react-hook-form
 ```
 npm i react-content-loader
 ```
+### 12. Add React-Toastify
+
+```
+npm i react-toastify
+```
 ## Tổ chức folder
 
 ```
